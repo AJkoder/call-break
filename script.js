@@ -13,7 +13,8 @@ function clearErrors() {
   }
 }
 
-// Validate inputs: calls and tricks won must be between 2 and 13 inclusive
+// Validate inputs: calls must be between 2 and 13 inclusive
+// won (tricks won) can be between 0 and 13 inclusive
 function validateInputs() {
   clearErrors();
   let valid = true;
@@ -28,8 +29,8 @@ function validateInputs() {
       setError(i, 'call', 'Enter value between 2 and 13');
       valid = false;
     }
-    if (isNaN(wonVal) || wonVal < 2 || wonVal > 13) {
-      setError(i, 'won', 'Enter value between 2 and 13');
+    if (isNaN(wonVal) || wonVal < 0 || wonVal > 13) {
+      setError(i, 'won', 'Enter value between 0 and 13');
       valid = false;
     }
   }
@@ -37,11 +38,11 @@ function validateInputs() {
 }
 
 // Calculate points based on call & tricks won
-// If tricks won >= call => points = tricks won
+// If tricks won >= call => points = call + 0.1 * (won - call)
 // else points = -call (penalty)
 function calculatePoints(call, won) {
   if (won >= call) {
-    return won;
+    return +(call + 0.1 * (won - call)).toFixed(2);
   } else {
     return -call;
   }
@@ -66,7 +67,7 @@ function saveScores() {
       leaderboard[playerName] = { rounds: 0, points: 0 };
     }
     leaderboard[playerName].rounds += 1;
-    leaderboard[playerName].points += points;
+    leaderboard[playerName].points = +(leaderboard[playerName].points + points).toFixed(2);
   }
   localStorage.setItem('lakdiLeaderboard', JSON.stringify(leaderboard));
   updateLeaderboardTable();
