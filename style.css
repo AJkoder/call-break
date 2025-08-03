@@ -1,0 +1,272 @@
+/* Reset & basics */
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+  padding: 1rem;
+  font-family: 'Poppins', sans-serif;
+  background: #121212;
+  color: #f1f1f1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+  padding-bottom: 3rem;
+}
+h1 {
+  margin-bottom: 1.5rem;
+  font-weight: 700;
+  font-size: 2.8rem;
+  color: #ffa500;
+  text-align: center;
+  text-shadow: 0 0 12px #ff8c00;
+}
+.container {
+  max-width: 960px;
+  width: 100%;
+  background: #1e1e2f;
+  border-radius: 18px;
+  box-shadow:
+    0 0 15px #ffae420d,
+    0 0 25px #ffae4266;
+  padding: 2rem 2rem 3rem 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Players horizontal layout: 4 equal partitions */
+.players-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+  width: 100%;
+  height: 280px; /* reduced height */
+  margin-bottom: 2rem;
+}
+
+/* Player Cards with distinct color themes */
+.player-card {
+  border-radius: 16px;
+  padding: 1.25rem 1rem;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.35);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #f0e9db;
+  position: relative;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+  user-select: none;
+  border: 2px solid transparent;
+}
+.player-card:hover {
+  transform: scale(1.03);
+  box-shadow: 0 12px 28px rgba(255,165,0,0.7);
+  border-color: #ffae42;
+}
+
+/* Different background colors for players */
+.player1 { background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);}
+.player2 { background: linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 100%);}
+.player3 { background: linear-gradient(135deg, #fbc7aa 0%, #f7abb6 100%);}
+.player4 { background: linear-gradient(135deg, #d4fc79 0%, #96e6a1 100%);}
+
+/* Editable Player Name input */
+.player-name {
+  font-size: 1.5rem;
+  font-weight: 700;
+  border: none;
+  border-bottom: 3px solid rgba(255,255,255,0.8);
+  background: transparent;
+  color: #fff;
+  width: 100%;
+  max-width: 200px;
+  text-align: center;
+  margin-bottom: 1.2rem;
+  padding: 6px 8px;
+  outline-offset: 3px;
+  transition: border-color 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+  cursor: text;
+  user-select: text;
+}
+.player-name:focus {
+  border-color: #ffae42;
+  outline: none;
+  background-color: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 0 10px 2px #ffae42;
+}
+
+/* Labels */
+label {
+  font-weight: 600;
+  font-size: 1rem;
+  margin-top: 8px;
+  margin-bottom: 5px;
+  color: #f8f4e3;
+  width: 100%;
+  max-width: 200px;
+  user-select: none;
+}
+
+/* Number inputs */
+input[type="number"] {
+  width: 100%;
+  max-width: 200px;
+  padding: 8px 12px;
+  font-size: 1.1rem;
+  border-radius: 10px;
+  border: none;
+  background-color: rgba(255, 255, 255, 0.15);
+  color: #fff;
+  text-align: center;
+  box-shadow: inset 0 0 6px #0008;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+  user-select: text;
+}
+input[type="number"]::placeholder {
+  color: #bbb;
+}
+input[type="number"]:focus {
+  background-color: rgba(255, 255, 255, 0.3);
+  box-shadow: 0 0 10px 2px #ffae42;
+  outline: none;
+}
+
+/* Error messages */
+.error {
+  font-size: 0.8rem;
+  color: #ff4b4b;
+  height: 18px;
+  margin-top: 3px;
+  min-height: 18px;
+  max-width: 200px;
+  text-align: center;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+/* Buttons container below players */
+.actions {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  flex-wrap: nowrap;
+  margin-bottom: 1.5rem;
+  width: 100%;
+  max-width: 960px;
+}
+
+/* Buttons */
+button {
+  cursor: pointer;
+  background-color: #ffa500;
+  border: none;
+  color: #1e1e2f;
+  font-weight: 700;
+  font-size: 1.15rem;
+  padding: 14px 28px;
+  border-radius: 30px;
+  box-shadow: 0 8px 18px #ffb84dcc;
+  transition: background-color 0.25s ease, transform 0.15s ease, box-shadow 0.3s ease;
+  user-select: none;
+  min-width: 140px;
+  flex: 1 1 auto; /* equal width buttons */
+  max-width: 250px;
+}
+button:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px #ffae42cc, 0 8px 18px #ffb84dcc;
+}
+
+button.clear {
+  background-color: #ff4b4b;
+  color: #fff;
+  box-shadow: 0 8px 18px #ff4b4bcc;
+}
+button.clear:hover {
+  background-color: #cc3a3a;
+}
+button:hover {
+  background-color: #ffb72f;
+  transform: scale(1.05);
+}
+
+/* Leaderboard Table */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 0 20px #ffa500aa;
+  background: #1e1e2f;
+}
+th, td {
+  padding: 14px 22px;
+  text-align: center;
+  font-size: 1.1rem;
+  color: #f9f7f3;
+  border-bottom: 1px solid #333;
+  user-select: none;
+}
+th {
+  background-color: #ffa500;
+  color: #1e1e2f;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+}
+tbody tr:nth-child(even) {
+  background-color: #2a2a3f;
+}
+tbody tr:hover {
+  background-color: #444460;
+}
+
+/* Leaderboard title */
+#leaderboard-title {
+  font-weight: 700;
+  color: #ffa500;
+  text-align: center;
+  margin-bottom: 0.8rem;
+  letter-spacing: 0.05em;
+}
+
+/* Responsive adjustments */
+@media (max-width: 960px) {
+  .players-grid {
+    grid-template-columns: repeat(2, 1fr);
+    height: auto;
+  }
+  .actions {
+    flex-wrap: wrap;
+  }
+  button {
+    max-width: 100%;
+    flex: 1 1 45%;
+    margin-bottom: 0.8rem;
+  }
+}
+@media (max-width: 520px) {
+  .players-grid {
+    grid-template-columns: 1fr;
+  }
+  button {
+    flex: 1 1 100%;
+  }
+}
+
+/* Increase max-width on inputs for large screens */
+@media (min-width: 960px) {
+  .player-name,
+  input[type="number"],
+  label {
+    max-width: 250px;
+  }
+}
+
+/* Bigger fonts for buttons on large screens */
+@media (min-width: 760px) {
+  button {
+    font-size: 1.25rem;
+  }
+}
